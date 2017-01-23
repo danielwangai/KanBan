@@ -35,3 +35,10 @@ def list_to_do():
     all_to_do = cursor.fetchall()
     # returns a set
     return all_to_do
+
+# lists only tasks in progress but not yet complete
+def list_doing():
+    cursor.execute("SELECT * FROM tasks WHERE status = 2")
+    all_doing = cursor.fetchall()
+    # returns a set
+    return all_doing
