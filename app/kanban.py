@@ -49,3 +49,10 @@ def list_done():
     all_done = cursor.fetchall()
     # returns a set
     return all_done
+
+# lists all tasks in table
+def list_all_tasks():
+    cursor.execute("SELECT * FROM tasks")
+    all_tasks = cursor.fetchall()
+    # returns a set
+    return all_tasks
