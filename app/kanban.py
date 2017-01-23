@@ -42,3 +42,10 @@ def list_doing():
     all_doing = cursor.fetchall()
     # returns a set
     return all_doing
+
+# lists only completed tasks
+def list_done():
+    cursor.execute("SELECT * FROM tasks WHERE status = 3")
+    all_done = cursor.fetchall()
+    # returns a set
+    return all_done
