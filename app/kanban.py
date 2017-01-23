@@ -27,3 +27,11 @@ def move_doing_to_done(status_code, completion_time, task_id):
     # moves task to complete
     cursor.execute("UPDATE tasks SET status = ?, end_time = ? WHERE id = ?", (status_code, completion_time, task_id))
     connect.commit()
+
+# function listing all dormant tasks - not yet began
+def list_to_do():
+    # lists only dormant tasks
+    cursor.execute("SELECT * FROM tasks WHERE status = 1")
+    all_to_do = cursor.fetchall()
+    # returns a set
+    return all_to_do
