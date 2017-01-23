@@ -21,3 +21,9 @@ def move_todo_to_doing(status_code, doing_time, task_id):
     cursor.execute("UPDATE tasks SET status = ?, doing_time = ? WHERE id = ?", (status_code, doing_time, task_id))
     # persist changes
     connect.commit()
+
+# function to to move task from doing state to done(complete)
+def move_doing_to_done(status_code, completion_time, task_id):
+    # moves task to complete
+    cursor.execute("UPDATE tasks SET status = ?, end_time = ? WHERE id = ?", (status_code, completion_time, task_id))
+    connect.commit()
