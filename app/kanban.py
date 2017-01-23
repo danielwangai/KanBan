@@ -14,3 +14,10 @@ def add_task(task_name, status_code):#to-do
     connect.commit()
     # close db connection
     connect.close()
+
+# generic function to move tasks from todo state to doing
+def move_todo_to_doing(status_code, doing_time, task_id):
+    # moves dormant task to doing
+    cursor.execute("UPDATE tasks SET status = ?, doing_time = ? WHERE id = ?", (status_code, doing_time, task_id))
+    # persist changes
+    connect.commit()
