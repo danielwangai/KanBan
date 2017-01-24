@@ -60,9 +60,9 @@ class KanBan(cmd.Cmd):
     file = None
 
     @docopt_cmd
-    def do_todo(self, arg):
-        """Usage: todo <task_name>"""
-        task_name = arg['<task_name>']
+    def do_todo(self, args):
+        """Usage: todo <args>..."""
+        task_name = " ".join(args['<args>'])
         add_task(task_name)
         print('The task {0} was successfully added.'.format(task_name))
 
