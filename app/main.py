@@ -7,6 +7,7 @@ Usage:
     my_program todo <task_name>
     my_program doing <task_id>
     my_program done <task_id>
+    my_program list todo
     my_program (-i | --interactive)
     my_program (-h | --help | --version)
 
@@ -82,11 +83,24 @@ class KanBan(cmd.Cmd):
         move_doing_to_done(int(task_id))
         print('The task {0} of id was successfully completed.'.format(task_id))
 
+    def do_list(self, arg):
+        """Usage: list todo"""
+        print('---------------------------------------------------------------')
+        print('-----------------------List of All TODOs-----------------------')
+        print('---------------------------------------------------------------')
+        print('---ID---|---------Task Description---------|---Start Date------')
+        print('---------------------------------------------------------------')
+        todo = list_to_do()
+        for i in todo:
+            print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
+        # print(todo[0])
+
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
 
         print('Good Bye!')
         exit()
+
 
 opt = docopt(__doc__, sys.argv[1:])
 
