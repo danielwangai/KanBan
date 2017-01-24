@@ -1,4 +1,5 @@
 import sqlite3 as lite
+from datetime import datetime
 
 # creates db - kanban.db if doens't exist
 connect = lite.connect('kanban.db')
@@ -18,6 +19,7 @@ def add_task(task_name, status_code):#to-do
 # generic function to move tasks from todo state to doing
 def move_todo_to_doing(status_code, doing_time, task_id):
     # moves dormant task to doing
+    doing_time = datetime.now("%Y-%m-%d %H:%m:%S")
     cursor.execute("UPDATE tasks SET status = ?, doing_time = ? WHERE id = ?", (status_code, doing_time, task_id))
     # persist changes
     connect.commit()
@@ -25,6 +27,7 @@ def move_todo_to_doing(status_code, doing_time, task_id):
 # function to to move task from doing state to done(complete)
 def move_doing_to_done(status_code, completion_time, task_id):
     # moves task to complete
+    completion_time = datetime.now("%Y-%m-%d %H:%m:%S")
     cursor.execute("UPDATE tasks SET status = ?, end_time = ? WHERE id = ?", (status_code, completion_time, task_id))
     connect.commit()
 
