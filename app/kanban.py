@@ -15,7 +15,7 @@ def add_task(task_name):#to-do
     # persist changes
     connect.commit()
     # close db connection
-    connect.close()
+    # connect.close()
 
 # generic function to move tasks from todo state to doing
 def move_todo_to_doing(task_id):
