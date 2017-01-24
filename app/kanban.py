@@ -18,9 +18,10 @@ def add_task(task_name):#to-do
     connect.close()
 
 # generic function to move tasks from todo state to doing
-def move_todo_to_doing(status_code, doing_time, task_id):
+def move_todo_to_doing(doing_time, task_id):
     # moves dormant task to doing
     doing_time = datetime.now("%Y-%m-%d %H:%m:%S")
+    status_code = 2
     cursor.execute("UPDATE tasks SET status = ?, doing_time = ? WHERE id = ?", (status_code, doing_time, task_id))
     # persist changes
     connect.commit()
