@@ -8,8 +8,9 @@ cursor = connect.cursor()
 # create tasks table if it doesn't exist
 cursor.execute("CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, task_name TEXT NOT NULL, status INT NOT NULL, start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, doing_time TEXT, end_time TEXT)")
 
-def add_task(task_name, status_code):#to-do
+def add_task(task_name):#to-do
     # test with dummy data
+    status_code = 1#code for todo state
     cursor.execute("INSERT INTO tasks(task_name, status) VALUES(?, ?)", (task_name, status_code))
     # persist changes
     connect.commit()
