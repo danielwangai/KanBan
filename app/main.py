@@ -9,6 +9,7 @@ Usage:
     my_program done <task_id>
     my_program list todo
     my_program list_doing
+    my_program list_done
     my_program (-i | --interactive)
     my_program (-h | --help | --version)
 
@@ -101,11 +102,23 @@ class KanBan(cmd.Cmd):
     def do_list_doing(self, arg):
         """Usage: list_doing"""
         print('---------------------------------------------------------------')
-        print('-----------------------List of All TODOs-----------------------')
+        print('------------------List of All Tasks inprogress-----------------')
         print('---------------------------------------------------------------')
         print('---ID---|---------Task Description---------|---Start Date------')
         print('---------------------------------------------------------------')
         doing = list_doing() #a list of sets from querying
+        for i in doing:
+            print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
+
+    @docopt_cmd
+    def do_list_done(self, arg):
+        """Usage: list_done"""
+        print('---------------------------------------------------------------')
+        print('-----------------------List of All Completed projects----------')
+        print('---------------------------------------------------------------')
+        print('---ID---|---------Task Description---------|---Start Date------')
+        print('---------------------------------------------------------------')
+        doing = list_done() #a list of sets from querying
         for i in doing:
             print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
 
