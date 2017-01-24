@@ -6,6 +6,7 @@ interactive command application.
 Usage:
     my_program todo <task_name>
     my_program doing <task_id>
+    my_program done <task_id>
     my_program (-i | --interactive)
     my_program (-h | --help | --version)
 
@@ -72,6 +73,14 @@ class KanBan(cmd.Cmd):
         task_id = arg['<task_id>']
         move_todo_to_doing(int(task_id))
         print('The task {0} of id was successfully moved to doing state.'.format(task_id))
+
+    @docopt_cmd
+    def do_done(self, arg):
+        """Usage: done <task_id>"""
+
+        task_id = arg['<task_id>']
+        move_doing_to_done(int(task_id))
+        print('The task {0} of id was successfully completed.'.format(task_id))
 
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
