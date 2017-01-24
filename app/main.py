@@ -64,16 +64,6 @@ class KanBan(cmd.Cmd):
         add_task(task_name)
         print('The task {0} was successfully added.'.format(task_name))
 
-    @docopt_cmd
-    def do_serial(self, arg):
-        """Usage: serial <port> [--baud=<n>] [--timeout=<seconds>]
-
-Options:
-    --baud=<n>  Baudrate [default: 9600]
-        """
-
-        print(arg)
-
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
 
