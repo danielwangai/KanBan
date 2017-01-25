@@ -83,8 +83,7 @@ class KanBan(cmd.Cmd):
         """Usage: done <task_id>"""
 
         task_id = arg['<task_id>']
-        move_doing_to_done(int(task_id))
-        print('The task {0} of id was successfully completed.'.format(task_id))
+        move_card_to_done(task_id)
 
     @docopt_cmd
     def do_list(self, arg):
