@@ -23,6 +23,8 @@ def move_card_to_done(task_id):
             # move if status is doing
             move_doing_to_done(task_id)
             print("Moved task ** {0} ** to DONE state.".format((check_if_card_exists(task_id)[0][1]).upper()))
+    else:
+        print("The task of id {0} doesnt exist. Type *list_doing* to list all task in TODO state.".format(task_id))
 
 def move_task_to_doing(task_id):
     # if record with that ID is foind
