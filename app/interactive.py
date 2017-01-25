@@ -1,5 +1,5 @@
 import sqlite3 as lite
-from db_kanban import add_task, move_todo_to_doing, move_doing_to_done, list_to_do, list_doing, list_done, list_all_tasks
+from db_kanban import add_task, move_todo_to_doing, move_doing_to_done, list_to_do, list_doing, list_done, list_all_tasks, delete_task
 
 # creates db - kanban.db if doens't exist
 connect = lite.connect('kanban.db')
@@ -38,3 +38,11 @@ def move_task_to_doing(task_id):
             print( "The task named ** {0} ** was successfully moved to DOING state.".format((check_if_card_exists(task_id)[0][1]).upper()))
     else:
         print("The task of id {0} doesnt exist. Type *list todo* to list all task in TODO state.".format(task_id))
+
+def delete_task_by_id(task_id):
+    if len(check_if_card_exists(task_id)) == 1:
+        # delete task
+        delete_task(task_id)
+        print("Task of id {0} was Successfully deleted.".format(task_id))
+    else:
+        print("Cannot delete a task that doesnt exist. Type list_all to list all tasks.")

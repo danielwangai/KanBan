@@ -34,6 +34,10 @@ def move_doing_to_done(task_id):
     cursor.execute("UPDATE tasks SET status = ?, end_time = ? WHERE id = ?", (status_code, completion_time, task_id))
     connect.commit()
 
+def delete_task(task_id):
+    cursor.execute("DELETE FROM tasks WHERE id = (?)", ([task_id]))
+    connect.commit()
+
 # function listing all dormant tasks - not yet began
 def list_to_do():
     # lists only dormant tasks

@@ -24,7 +24,7 @@ import sys
 import cmd
 from docopt import docopt, DocoptExit
 from db_kanban import add_task, move_todo_to_doing, move_doing_to_done, list_to_do, list_doing, list_done, list_all_tasks
-from interactive import move_card_to_done, move_task_to_doing
+from interactive import move_card_to_done, move_task_to_doing, delete_task_by_id
 
 
 def docopt_cmd(func):
@@ -80,6 +80,7 @@ class KanBan(cmd.Cmd):
         print("         type - list_all - to display all tasks in TODO state.      ")
         print("         type - doing <id of task> - to move task from TODO state to DOING state.        ")
         print("         type - done <id of task> - to move task from DOING state to DONE state.     ")
+        print("         type - delete <id of task> - PERMANENTLY DELETES task.     ")
         print('------------------------------------------------------------------------------')
 
 
@@ -189,6 +190,13 @@ class KanBan(cmd.Cmd):
         print("     *TODO - accessed by number 1")
         print("     *DOING - accessed by number 2")
         print("     *DONE - accessed by number 3")
+
+    @docopt_cmd
+    def do_delete(self, arg):
+        """Usage: done <task_id>"""
+        task_id = arg['<task_id>']
+        delete_task_by_id(task_id)
+
 
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
