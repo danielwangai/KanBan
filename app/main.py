@@ -24,6 +24,7 @@ import sys
 import cmd
 from docopt import docopt, DocoptExit
 from kanban import add_task, move_todo_to_doing, move_doing_to_done, list_to_do, list_doing, list_done, list_all_tasks
+from interactive import move_card_from_todo_to_doing
 
 
 def docopt_cmd(func):
@@ -75,8 +76,7 @@ class KanBan(cmd.Cmd):
         """Usage: doing <task_id>"""
 
         task_id = arg['<task_id>']
-        move_todo_to_doing(int(task_id))
-        print('The task {0} of id was successfully moved to doing state.'.format(task_id))
+        move_card_from_todo_to_doing(task_id)
 
     @docopt_cmd
     def do_done(self, arg):
@@ -97,7 +97,7 @@ class KanBan(cmd.Cmd):
         todo = list_to_do()
         for i in todo:
             print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
-        # print(todo[0])
+        print(todo)
 
     @docopt_cmd
     def do_list_doing(self, arg):
