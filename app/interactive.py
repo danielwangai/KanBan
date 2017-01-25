@@ -30,3 +30,10 @@ def move_card_to_done(task_id):
             # move if status is doing
             move_doing_to_done(task_id)
             print("Moved task ** {0} ** to DONE state.".format((check_if_card_exists(task_id)[0][1]).upper()))
+
+def move_task_to_doing(task_id):
+    # if record with that ID is foind
+    if len(check_if_card_exists(task_id)) == 1:
+        if check_if_card_exists(task_id)[0][2] == 2:
+            # check if task is in doing state i.e. rejects move for same states
+            print("Cannot move task from DOING back to DOING directly.")#should only move to done state
