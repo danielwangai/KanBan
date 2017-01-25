@@ -114,20 +114,24 @@ class KanBan(cmd.Cmd):
         headers = ["ID", "Task Description", "Start Date"]
         table = []
         for i in todo:
-            table.append([i[0], i[1], i[2]])
-        print(tabulate(table, headers, tablefmt="fancy_grid"))
+            table.append([i[0], i[1], i[3]])
+        if len(todo) == 0:
+            print("No record of tasks in DOING state.")
+        elif len(todo) >= 0:
+            print(tabulate(table, headers, tablefmt="fancy_grid"))
 
     @docopt_cmd
     def do_list_doing(self, arg):
         """Usage: list_doing"""
-        print('---------------------------------------------------------------')
-        print('------------------List of All Tasks inprogress-----------------')
-        print('---------------------------------------------------------------')
-        print('---ID---|---------Task Description---------|---Start Date------')
-        print('---------------------------------------------------------------')
+        headers = ["ID", "Task Description", "Start Date"]
+        table = []
         doing = list_doing() #a list of sets from querying
         for i in doing:
-            print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
+            table.append([i[0], i[1], i[2]])
+        if len(doing) == 0:
+            print("No record of tasks in DOING state.")
+        elif len(doing) >= 0:
+            print(tabulate(table, headers, tablefmt="fancy_grid"))
 
     @docopt_cmd
     def do_list_done(self, arg):
