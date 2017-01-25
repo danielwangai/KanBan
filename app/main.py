@@ -25,6 +25,8 @@ import cmd
 from docopt import docopt, DocoptExit
 from db_kanban import add_task, move_todo_to_doing, move_doing_to_done, list_to_do, list_doing, list_done, list_all_tasks
 from interactive import move_card_to_done, move_task_to_doing, delete_task_by_id
+# import tabulate
+from tabulate import tabulate
 
 
 def docopt_cmd(func):
@@ -72,16 +74,22 @@ class KanBan(cmd.Cmd):
         print('shifts them from one stage to another.**')
         print('------------------------------------------------------------------------------')
         # display list of commands here
-        print("                     LIST OF COMMANDS       ")
-        print("         type - todo <name of task> - to add a task.     ")
-        print("         type - list_doing - to display all tasks in DOING state.        ")
-        print("         type - list_done - to display all tasks in DONE state.      ")
-        print("         type - list todo - to display all tasks in TODO state.      ")
-        print("         type - list_all - to display all tasks in TODO state.      ")
-        print("         type - doing <id of task> - to move task from TODO state to DOING state.        ")
-        print("         type - done <id of task> - to move task from DOING state to DONE state.     ")
-        print("         type - delete <id of task> - PERMANENTLY DELETES task.     ")
-        print('------------------------------------------------------------------------------')
+        # print("                     LIST OF COMMANDS       ")
+        # print("         type - todo <name of task> - to add a task.     ")
+        # print("         type - list_doing - to display all tasks in DOING state.        ")
+        # print("         type - list_done - to display all tasks in DONE state.      ")
+        # print("         type - list todo - to display all tasks in TODO state.      ")
+        # print("         type - list_all - to display all tasks in TODO state.      ")
+        # print("         type - doing <id of task> - to move task from TODO state to DOING state.        ")
+        # print("         type - done <id of task> - to move task from DOING state to DONE state.     ")
+        # print("         type - delete <id of task> - PERMANENTLY DELETES task.     ")
+        # print('------------------------------------------------------------------------------')
+        headers = ["              LIST OF COMMANDS"]
+        table = [["Type - todo <name of task> - to add a task."], ["Type - list_doing - to display all tasks in DOING state."],
+        ["Type - list_done - to display all tasks in DONE state."], ["Type - list todo - to display all tasks in TODO state."],
+        ["Type - list_all - to display all tasks in TODO state."], ["Type - doing <id of task> - to move task from TODO state to DOING state."],
+        ["Type - done <id of task> - to move task from DOING state to DONE state."], ["Type - delete <id of task> - PERMANENTLY DELETES task."]]
+        print(tabulate(table, headers, tablefmt="fancy_grid"))
 
 
     # intro = 'Welcome, to KanBan Task Manager' \
