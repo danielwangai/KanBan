@@ -25,4 +25,8 @@ def move_card_to_done(task_id):
             print("Cannot move task from TODO to DONE directly. Move to DOING state first.")
         elif check_if_card_exists(task_id)[0][2] == 3:
             # cannot move tassk from done to done
-            print("Cannot move task from TODO to DONE directly. Move to DOING state first.")            
+            print("Cannot move task from TODO to DONE directly. Move to DOING state first.")
+        elif check_if_card_exists(task_id)[0][2] == 2:
+            # move if status is doing
+            move_doing_to_done(task_id)
+            print("Moved task ** {0} ** to DONE state.".format((check_if_card_exists(task_id)[0][1]).upper()))
