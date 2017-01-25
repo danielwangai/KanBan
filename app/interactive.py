@@ -11,13 +11,6 @@ def check_if_card_exists(task_id):
     result = cursor.fetchall()
     return result#returns fetched record
 
-def move_card_from_todo_to_doing(task_id):
-    if len(check_if_card_exists(task_id)) == 1:
-        move_todo_to_doing(task_id)
-        print( "The task of id {0} was successfully moved to DOING state.".format(task_id))
-    else:
-        print("The task of id {0} doesnt exist. Type *list_doing* to list all task in TODO state.".format(task_id))
-
 def move_card_to_done(task_id):
     if len(check_if_card_exists(task_id)) == 1:
         if check_if_card_exists(task_id)[0][2] == 1:
@@ -37,3 +30,9 @@ def move_task_to_doing(task_id):
         if check_if_card_exists(task_id)[0][2] == 2:
             # check if task is in doing state i.e. rejects move for same states
             print("Cannot move task from DOING back to DOING directly.")#should only move to done state
+        elif check_if_card_exists(task_id)[0][2] == 1:
+            # accept move to DOING state for task in TODO state
+            move_todo_to_doing(task_id)
+            print( "The task named ** {0} ** was successfully moved to DOING state.".format((check_if_card_exists(task_id)[0][1]).upper()))
+    else:
+        print("The task of id {0} doesnt exist. Type *list_doing* to list all task in TODO state.".format(task_id))
