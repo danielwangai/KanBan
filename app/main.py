@@ -10,6 +10,7 @@ Usage:
     my_program list todo
     my_program list_doing
     my_program list_done
+    my_program status
     my_program (-i | --interactive)
     my_program (-h | --help | --version)
 
@@ -156,6 +157,14 @@ class KanBan(cmd.Cmd):
         for i in done:
             print("{0}".format(i[1]))
 
+
+    @docopt_cmd
+    def do_status(self, arg):
+        """Usage: status"""
+        print("Tasks have 3 states:-")
+        print("     *TODO - accessed by number 1")
+        print("     *DOING - accessed by number 2")
+        print("     *DONE - accessed by number 3")
 
     def do_quit(self, arg):
         """Quits out of Interactive Mode."""
