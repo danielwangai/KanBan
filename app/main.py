@@ -110,15 +110,12 @@ class KanBan(cmd.Cmd):
     @docopt_cmd
     def do_list(self, arg):
         """Usage: list todo"""
-        print('---------------------------------------------------------------')
-        print('-----------------------List of All TODOs-----------------------')
-        print('---------------------------------------------------------------')
-        print('---ID---|---------Task Description---------|---Start Date------')
-        print('---------------------------------------------------------------')
         todo = list_to_do()
+        headers = ["ID", "Task Description", "Start Date"]
+        table = []
         for i in todo:
-            print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
-        print(todo)
+            table.append([i[0], i[1], i[2]])
+        print(tabulate(table, headers, tablefmt="fancy_grid"))
 
     @docopt_cmd
     def do_list_doing(self, arg):
