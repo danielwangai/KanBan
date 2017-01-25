@@ -59,8 +59,24 @@ def docopt_cmd(func):
 
 
 class KanBan(cmd.Cmd):
-    intro = 'Welcome, to KanBan Task Manager' \
-        + ' (type help for a list of commands.)'
+
+    def intro():
+        print('------------------------------------------------------------------------------')
+        print('------------------------------------------------------------------------------')
+        print('                     _______')
+        print('                        |       /\     _____  |   /')
+        print('                        |      /  \    |____  |__/')
+        print('                        |     /____\    ____| |  \ ')
+        print('                        |    /      \         |   \ ')
+        print('** A simple Command Line application to add, display tasks in all stages, and ')
+        print('shifts them from one stage to another.**')
+        print('------------------------------------------------------------------------------')
+        print('------------------------------------------------------------------------------')
+
+
+    # intro = 'Welcome, to KanBan Task Manager' \
+    #     + ' (type help for a list of commands.)'
+    intro = intro()
     prompt = '(KanBan) '
     file = None
 
