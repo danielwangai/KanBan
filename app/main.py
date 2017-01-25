@@ -71,6 +71,15 @@ class KanBan(cmd.Cmd):
         print('** A simple Command Line application to add, display tasks in all stages, and ')
         print('shifts them from one stage to another.**')
         print('------------------------------------------------------------------------------')
+        # display list of commands here
+        print("                     LIST OF COMMANDS       ")
+        print("         type - todo <name of task> - to add a task.     ")
+        print("         type - list_doing - to display all tasks in DOING state.        ")
+        print("         type - list_done - to display all tasks in DONE state.      ")
+        print("         type - list todo - to display all tasks in TODO state.      ")
+        print("         type - list_all - to display all tasks in TODO state.      ")
+        print("         type - doing <id of task> - to move task from TODO state to DOING state.        ")
+        print("         type - done <id of task> - to move task from DOING state to DONE state.     ")
         print('------------------------------------------------------------------------------')
 
 
