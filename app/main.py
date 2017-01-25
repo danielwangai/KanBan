@@ -24,7 +24,7 @@ import sys
 import cmd
 from docopt import docopt, DocoptExit
 from kanban import add_task, move_todo_to_doing, move_doing_to_done, list_to_do, list_doing, list_done, list_all_tasks
-from interactive import move_card_from_todo_to_doing
+from interactive import move_card_to_done, move_task_to_doing
 
 
 def docopt_cmd(func):
@@ -76,7 +76,7 @@ class KanBan(cmd.Cmd):
         """Usage: doing <task_id>"""
 
         task_id = arg['<task_id>']
-        move_card_from_todo_to_doing(task_id)
+        move_task_to_doing(task_id)
 
     @docopt_cmd
     def do_done(self, arg):
