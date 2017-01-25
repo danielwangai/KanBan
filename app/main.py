@@ -80,6 +80,7 @@ class KanBan(cmd.Cmd):
         print("         type - list_all - to display all tasks in TODO state.      ")
         print("         type - doing <id of task> - to move task from TODO state to DOING state.        ")
         print("         type - done <id of task> - to move task from DOING state to DONE state.     ")
+        print("         type - delete <id of task> - PERMANENTLY DELETES task.     ")
         print('------------------------------------------------------------------------------')
 
 
