@@ -6,7 +6,7 @@ connect = lite.connect('kanban.db')
 cursor = connect.cursor()
 
 # create tasks table if it doesn't exist
-cursor.execute("CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, task_name TEXT NOT NULL, status INT NOT NULL, start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, doing_time DATETIME, end_time DATETIME)")
+cursor.execute("CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, task_name TEXT NOT NULL, status INT NOT NULL, create_task_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, start_time DATETIME, end_time DATETIME)")
 
 def add_task(task_name):#to-do
     # test with dummy data
@@ -22,7 +22,7 @@ def move_todo_to_doing(task_id):
     # moves dormant task to doing
     doing_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     status_code = 2#code for doing state
-    cursor.execute("UPDATE tasks SET status = ?, doing_time = ? WHERE id = ?", (status_code, doing_time, task_id))
+    cursor.execute("UPDATE tasks SET status = ?, start_time = ? WHERE id = ?", (status_code, doing_time, task_id))
     # persist changes
     connect.commit()
 
