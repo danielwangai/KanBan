@@ -16,4 +16,4 @@ def move_card_from_todo_to_doing(task_id):
         move_todo_to_doing(task_id)
         print( "The task of id {0} was successfully moved to DOING state.".format(task_id))
     else:
-        return "The task of id {0} doesnt exist. Type *list_doing* to list all task in TODO state.".format(task_id)
+        print("The task of id {0} doesnt exist. Type *list_doing* to list all task in TODO state.".format(task_id))
