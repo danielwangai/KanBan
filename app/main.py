@@ -149,36 +149,24 @@ class KanBan(cmd.Cmd):
     @docopt_cmd
     def do_list_all(self, arg):
         """Usage: list_done"""
-        print('---------------------------------------------------------------')
-        print('-----------------------List of All Completed projects----------')
-        print('---------------------------------------------------------------')
-        print('---ID---|---------Task Description---------|---Start Date------')
-        print('---------------------------------------------------------------')
+        headers = ["ID", "Task Description", "Start Date"]
+        table = []
         all_tasks = list_all_tasks() #a list of sets from querying
-        # for i in doing:
-        #     print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
         todo = []
         doing = []
         done = []
         for i in all_tasks:
             if i[2] == 1:
-                todo.append(i)
+                todo.append([i[0], i[1], i[2]])
             elif i[2] == 2:
-                doing.append(i)
+                doing.append([i[0], i[1], i[2]])
             elif i[2] == 3:
-                done.append(i)
-
-        print("----------------------Tasks in TODO----------------------------\n\n")
-        for i in todo:
-            print("{0}".format(i[1]))
-
-        print("----------------------Tasks in Progress----------------------------\n\n")
-        for i in doing:
-            print("{0}".format(i[1]))
-
-        print("----------------------Tasks in Complete----------------------------\n\n")
-        for i in done:
-            print("{0}".format(i[1]))
+                done.append([i[0], i[1], i[2]])
+        print(tabulate(todo, headers, tablefmt="fancy_grid"))
+        print("----------------------------------------------")
+        print(tabulate(doing, headers, tablefmt="fancy_grid"))
+        print("----------------------------------------------")
+        print(tabulate(done, headers, tablefmt="fancy_grid"))
 
 
     @docopt_cmd
