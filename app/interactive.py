@@ -1,5 +1,5 @@
 import sqlite3 as lite
-from kanban import add_task, move_todo_to_doing, move_doing_to_done, list_to_do, list_doing, list_done, list_all_tasks
+from db_kanban import add_task, move_todo_to_doing, move_doing_to_done, list_to_do, list_doing, list_done, list_all_tasks
 
 # creates db - kanban.db if doens't exist
 connect = lite.connect('kanban.db')
