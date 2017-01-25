@@ -136,14 +136,15 @@ class KanBan(cmd.Cmd):
     @docopt_cmd
     def do_list_done(self, arg):
         """Usage: list_done"""
-        print('---------------------------------------------------------------')
-        print('-----------------------List of All Completed projects----------')
-        print('---------------------------------------------------------------')
-        print('---ID---|---------Task Description---------|---Start Date------')
-        print('---------------------------------------------------------------')
+        headers = ["ID", "Task Description", "Start Date"]
+        table = []
         done = list_done() #a list of sets from querying
         for i in done:
-            print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
+            table.append([i[0], i[1], i[2]])
+        if len(done) == 0:
+            print("No record of tasks in DONE state.")
+        elif len(done) >= 0:
+            print(tabulate(table, headers, tablefmt="fancy_grid"))
 
     @docopt_cmd
     def do_list_all(self, arg):
