@@ -7,7 +7,7 @@ Usage:
     my_program todo <task_name>
     my_program doing <task_id>
     my_program done <task_id>
-    my_program list todo
+    my_program list_todo
     my_program list_doing
     my_program list_done
     my_program status
@@ -113,8 +113,8 @@ class KanBan(cmd.Cmd):
         move_card_to_done(task_id)
 
     @docopt_cmd
-    def do_list(self, arg):
-        """Usage: list todo"""
+    def do_list_todo(self, arg):
+        """Usage: list_todo"""
         todo = list_to_do()
         headers = ["ID", "Task Description", "Start Date"]
         table = []
