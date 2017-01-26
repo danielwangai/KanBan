@@ -79,6 +79,11 @@ class KanBan(cmd.Cmd):
         ["Type - done <id of task> - to move task from DOING state to DONE state."], ["Type - delete <id of task> - PERMANENTLY DELETES task."]]
         print(tabulate(table, headers, tablefmt="fancy_grid"))
 
+    def data_to_tabulate(self, table, headers, state):
+        if len(table) == 0:
+            print("No data found id {0} state".format(state))
+        else:
+            print(tabulate(table, headers, tablefmt="fancy_grid"))
 
     # intro = 'Welcome, to KanBan Task Manager' \
     #     + ' (type help for a list of commands.)'
