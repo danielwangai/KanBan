@@ -129,7 +129,7 @@ class KanBan(cmd.Cmd):
         table = []
         doing = list_doing() #a list of sets from querying
         for i in doing:
-            table.append([i[0], i[1], i[2]])
+            table.append([i[0], i[1], i[3]])
         self.data_to_tabulate(table, headers, "DOING")
 
     @docopt_cmd
@@ -139,7 +139,7 @@ class KanBan(cmd.Cmd):
         table = []
         done = list_done() #a list of sets from querying
         for i in done:
-            table.append([i[0], i[1], i[2]])
+            table.append([i[0], i[1], i[3]])
         self.data_to_tabulate(table, headers, "TODO")
 
     @docopt_cmd
@@ -153,11 +153,11 @@ class KanBan(cmd.Cmd):
         done = []
         for i in all_tasks:
             if i[2] == 1:
-                todo.append([i[0], i[1], i[2]])
+                todo.append([i[0], i[1], i[3]])
             elif i[2] == 2:
-                doing.append([i[0], i[1], i[2]])
+                doing.append([i[0], i[1], i[3]])
             elif i[2] == 3:
-                done.append([i[0], i[1], i[2]])
+                done.append([i[0], i[1], i[3]])
 
         print("--------------TODO--------------------")
         self.data_to_tabulate(todo, headers, "TODO")
