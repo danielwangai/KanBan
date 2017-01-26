@@ -25,6 +25,8 @@ import cmd
 from docopt import docopt, DocoptExit
 from db_kanban import add_task, move_todo_to_doing, move_doing_to_done, list_to_do, list_doing, list_done, list_all_tasks
 from interactive import move_card_to_done, move_task_to_doing, delete_task_by_id
+# import tabulate
+from tabulate import tabulate
 
 
 def docopt_cmd(func):
@@ -70,19 +72,18 @@ class KanBan(cmd.Cmd):
         print('                        |    /      \         |   \ ')
         print('** A simple Command Line application to add, display tasks in all stages, and ')
         print('shifts them from one stage to another.**')
-        print('------------------------------------------------------------------------------')
-        # display list of commands here
-        print("                     LIST OF COMMANDS       ")
-        print("         type - todo <name of task> - to add a task.     ")
-        print("         type - list_doing - to display all tasks in DOING state.        ")
-        print("         type - list_done - to display all tasks in DONE state.      ")
-        print("         type - list todo - to display all tasks in TODO state.      ")
-        print("         type - list_all - to display all tasks in TODO state.      ")
-        print("         type - doing <id of task> - to move task from TODO state to DOING state.        ")
-        print("         type - done <id of task> - to move task from DOING state to DONE state.     ")
-        print("         type - delete <id of task> - PERMANENTLY DELETES task.     ")
-        print('------------------------------------------------------------------------------')
+        headers = ["              LIST OF COMMANDS"]
+        table = [["Type - todo <name of task> - to add a task."], ["Type - list_doing - to display all tasks in DOING state."],
+        ["Type - list_done - to display all tasks in DONE state."], ["Type - list todo - to display all tasks in TODO state."],
+        ["Type - list_all - to display all tasks in TODO state."], ["Type - doing <id of task> - to move task from TODO state to DOING state."],
+        ["Type - done <id of task> - to move task from DOING state to DONE state."], ["Type - delete <id of task> - PERMANENTLY DELETES task."]]
+        print(tabulate(table, headers, tablefmt="fancy_grid"))
 
+    def data_to_tabulate(self, table, headers, state):
+        if len(table) == 0:
+            print("No data found id {0} state".format(state))
+        else:
+            print(tabulate(table, headers, tablefmt="fancy_grid"))
 
     # intro = 'Welcome, to KanBan Task Manager' \
     #     + ' (type help for a list of commands.)'
@@ -114,73 +115,59 @@ class KanBan(cmd.Cmd):
     @docopt_cmd
     def do_list(self, arg):
         """Usage: list todo"""
-        print('---------------------------------------------------------------')
-        print('-----------------------List of All TODOs-----------------------')
-        print('---------------------------------------------------------------')
-        print('---ID---|---------Task Description---------|---Start Date------')
-        print('---------------------------------------------------------------')
         todo = list_to_do()
+        headers = ["ID", "Task Description", "Start Date"]
+        table = []
         for i in todo:
-            print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
-        print(todo)
+            table.append([i[0], i[1], i[3]])
+        self.data_to_tabulate(table, headers, "TODO")
 
     @docopt_cmd
     def do_list_doing(self, arg):
         """Usage: list_doing"""
-        print('---------------------------------------------------------------')
-        print('------------------List of All Tasks inprogress-----------------')
-        print('---------------------------------------------------------------')
-        print('---ID---|---------Task Description---------|---Start Date------')
-        print('---------------------------------------------------------------')
+        headers = ["ID", "Task Description", "Start Date"]
+        table = []
         doing = list_doing() #a list of sets from querying
         for i in doing:
-            print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
+            table.append([i[0], i[1], i[2]])
+        self.data_to_tabulate(table, headers, "DOING")
 
     @docopt_cmd
     def do_list_done(self, arg):
         """Usage: list_done"""
-        print('---------------------------------------------------------------')
-        print('-----------------------List of All Completed projects----------')
-        print('---------------------------------------------------------------')
-        print('---ID---|---------Task Description---------|---Start Date------')
-        print('---------------------------------------------------------------')
+        headers = ["ID", "Task Description", "Start Date"]
+        table = []
         done = list_done() #a list of sets from querying
         for i in done:
-            print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
+            table.append([i[0], i[1], i[2]])
+        self.data_to_tabulate(table, headers, "TODO")
 
     @docopt_cmd
     def do_list_all(self, arg):
         """Usage: list_done"""
-        print('---------------------------------------------------------------')
-        print('-----------------------List of All Completed projects----------')
-        print('---------------------------------------------------------------')
-        print('---ID---|---------Task Description---------|---Start Date------')
-        print('---------------------------------------------------------------')
+        headers = ["ID", "Task Description", "Start Date"]
+        table = []
         all_tasks = list_all_tasks() #a list of sets from querying
-        # for i in doing:
-        #     print('   {0}   |         {1}         |      {2}      '.format(i[0], i[1], i[3]))
         todo = []
         doing = []
         done = []
         for i in all_tasks:
             if i[2] == 1:
-                todo.append(i)
+                todo.append([i[0], i[1], i[2]])
             elif i[2] == 2:
-                doing.append(i)
+                doing.append([i[0], i[1], i[2]])
             elif i[2] == 3:
-                done.append(i)
+                done.append([i[0], i[1], i[2]])
 
-        print("----------------------Tasks in TODO----------------------------\n\n")
-        for i in todo:
-            print("{0}".format(i[1]))
+        print("--------------TODO--------------------")
+        self.data_to_tabulate(todo, headers, "TODO")
 
-        print("----------------------Tasks in Progress----------------------------\n\n")
-        for i in doing:
-            print("{0}".format(i[1]))
+        print("--------------DOING-------------------")
+        self.data_to_tabulate(doing, headers, "DOING")
 
-        print("----------------------Tasks in Complete----------------------------\n\n")
-        for i in done:
-            print("{0}".format(i[1]))
+        print("--------------DONE--------------------")
+        self.data_to_tabulate(done, headers, "DONE")
+
 
 
     @docopt_cmd
