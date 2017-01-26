@@ -120,10 +120,7 @@ class KanBan(cmd.Cmd):
         table = []
         for i in todo:
             table.append([i[0], i[1], i[3]])
-        if len(todo) == 0:
-            print("No record of tasks in DOING state.")
-        elif len(todo) >= 0:
-            print(tabulate(table, headers, tablefmt="fancy_grid"))
+        self.data_to_tabulate(table, headers, "TODO")
 
     @docopt_cmd
     def do_list_doing(self, arg):
@@ -133,10 +130,7 @@ class KanBan(cmd.Cmd):
         doing = list_doing() #a list of sets from querying
         for i in doing:
             table.append([i[0], i[1], i[2]])
-        if len(doing) == 0:
-            print("No record of tasks in DOING state.")
-        elif len(doing) >= 0:
-            print(tabulate(table, headers, tablefmt="fancy_grid"))
+        self.data_to_tabulate(table, headers, "DOING")
 
     @docopt_cmd
     def do_list_done(self, arg):
@@ -146,10 +140,7 @@ class KanBan(cmd.Cmd):
         done = list_done() #a list of sets from querying
         for i in done:
             table.append([i[0], i[1], i[2]])
-        if len(done) == 0:
-            print("No record of tasks in DONE state.")
-        elif len(done) >= 0:
-            print(tabulate(table, headers, tablefmt="fancy_grid"))
+        self.data_to_tabulate(table, headers, "TODO")
 
     @docopt_cmd
     def do_list_all(self, arg):
@@ -167,11 +158,16 @@ class KanBan(cmd.Cmd):
                 doing.append([i[0], i[1], i[2]])
             elif i[2] == 3:
                 done.append([i[0], i[1], i[2]])
-        print(tabulate(todo, headers, tablefmt="fancy_grid"))
-        print("----------------------------------------------")
-        print(tabulate(doing, headers, tablefmt="fancy_grid"))
-        print("----------------------------------------------")
-        print(tabulate(done, headers, tablefmt="fancy_grid"))
+
+        print("--------------TODO--------------------")
+        self.data_to_tabulate(todo, headers, "TODO")
+
+        print("--------------DOING-------------------")
+        self.data_to_tabulate(doing, headers, "DOING")
+
+        print("--------------DONE--------------------")
+        self.data_to_tabulate(done, headers, "DONE")
+
 
 
     @docopt_cmd
